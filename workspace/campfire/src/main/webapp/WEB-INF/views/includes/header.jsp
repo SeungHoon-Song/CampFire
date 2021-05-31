@@ -8,54 +8,82 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/assets/css/layout.css"/>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	#header {
+		position: absolute;
+		background:#00000076;
+	}
+	@media screen and (max-width: 980px) {
+		#header {
+			background: #00000000;
+		}
+		#header > .navPanelToggle {
+			display: block;
+			color: black;
+    	}
+	}
+	@media screen and (max-width: 736px) {
+		#header > .navPanelToggle span {
+			display: none;
+			color: black;
+		}    
+	}
+</style>
 </head>
 <body>
 	
 			<!-- Header -->
-			<header id="header" style="height: 7em; position: absolute; background:#00000079;">
+			<header id="header" style="position: absolute;">
 				<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							<li class="current">
-								<a href="/">
-									<img class="current" src="/resources/images/icon/menu-icon.png" alt="홈 바로가기" height="50">
-								</a></li>
-	 
-							<li><a href="#">전체</a></li>
-							<li><a href="#">유/무료 캠핑장</a></li>
-							<li><a href="#">난이도 캠핑장</a></li>
-							<li><a href="#">글램핑/카라반</a></li>
+				<nav class="smallNav">
+					<ul>
+						<li><a href="javascript:goSignUp()" class="signup">회원가입</a></li>
+						<li><a href="javascript:goSignIn()" class="signin">로그인</a></li>
+						<li><a href="/elements">고객센터</a></li>
+					</ul>
+				</nav>
+				<nav id="nav">
+					<ul>
+						<li class="current">
+							<a href="/">
+								<img class="current" src="/resources/images/icon/menu-icon.png" alt="홈 바로가기" height="50">
+							</a></li>
+							<li><a href="/generic">공지사항</a></li>
+							<li>
+								<a href="#" class="dropdown">캠핑장</a> 
+								<ul>
+									<li><a href="#">전체</a></li>
+									<li><a href="#">유/무료 캠핑장</a></li>
+									<li><a href="#">난이도 캠핑장</a></li>
+									<li><a href="#">글램핑/카라반</a></li>
+								</ul>
+							</li>
+							
 							<li><a href="#">테마검색</a></li>
 							<li><a href="#">장작장터</a></li>
 							<li>
 								<a href="#" class="dropdown">모닥불</a>
 								<ul>
 									<li><a href="#">자유게시판</a></li>
-									<li><a href="#">캠핑 리뷰</a></li>
+									<li><a href="/campfire/review">캠핑 리뷰</a></li>
 									<li><a href="#">캠핑 팁</a></li>
 									<li><a href="#">캠핑 음식</a></li>
 									<li><a href="#">캠핑 가이드</a></li>
-									<li>
-										<a href="#">계정</a>
-										<ul>
-											<li><a href="javascript:goSignUp()" class="signup">회원가입</a></li>
-											<li><a href="javascript:goSignIn()" class="signin">로그인</a></li>
-										</ul>
-									</li>
 								</ul>
 							</li>
-							
-							<li>
-								<a href="#" class="dropdown">고객센터</a>
+							<li class="smallMenu">
+								<a href="/" class="dropdown">Home</a>
+								<a href="#" class="dropdown">계정</a>
 								<ul>
-									<li><a href="/generic">고객센터</a></li>
-									<li><a href="/elements">Elements</a></li>
+									<li><a href="javascript:goSignUp()" class="signup">회원가입</a></li>
+									<li><a href="javascript:goSignIn()" class="signin">로그인</a></li>
+									<li><a href="/elements">고객센터</a></li>
 								</ul>
-							</li>
+							</li>	
 						</ul>
 					</nav>
-			</header>			
+			</header>	
 			
 			
 				<!-- modal -->	
@@ -136,12 +164,15 @@
 					</div>
 		
 					<div class="modal signUpModal" style="display:none;">
+						<div class="backFa" style="display: none; text-align: right; margin-right: 2%;">
+							<span class="fa fa-hand-point-up" style="font-size: 12px;">나가기</span>
+						</div>
 						<div class="head-pop">
 							<div style="width: 49%; display: inline-block;"><h2>회원가입</h2></div>
 						</div>
 						<form name="" action="#" method="">
 							<div class="row gtr-uniform">
-								<div class="col-10 col-11-xsmall" style="margin: 0 auto;">
+								<div class="col-10 col-11-xsmall" style="margin: 0 auto; padding: 0;">
 									<span style="color: red;">* </span><span style="font-weight: bold;">아이디</span><span style="font-size: small; color: red;
 										font-family:sans-serif;"> (* 영문 혹은 영문+숫자 조합, 12길이)</span>
 									<input type="text" name="memberId" id="memberId" maxlength="12"/>

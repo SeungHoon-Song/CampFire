@@ -94,8 +94,13 @@
 				<!-- Nav -->
 				<nav class="smallNav">
 					<ul>
+						<c:if test="${sessionId eq null}">
 						<li><a href="javascript:goSignUp()" class="signup">회원가입</a></li>
 						<li><a href="javascript:goSignIn()" class="signin">로그인</a></li>
+						</c:if>	
+						<c:if test="${sessionId ne null}">
+						<li><a href="/logout" class="logout">로그아웃</a></li>
+						</c:if>
 						<li><a href="/elements">고객센터</a></li>
 					</ul>
 				</nav>
@@ -110,10 +115,11 @@
 							<li>
 								<a href="#" class="dropdown">캠핑장</a> 
 								<ul>
-									<li><a href="#">전체</a></li>
-									<li><a href="#">유/무료 캠핑장</a></li>
-									<li><a href="#">난이도 캠핑장</a></li>
-									<li><a href="#">글램핑/카라반</a></li>
+									<li><a href="/camp/search">전체</a></li>
+									<li><a href="/camp/pay">유료 캠핑장</a></li>
+									<li><a href="/camp/free">무료 캠핑장</a></li>
+									<li><a href="/camp/level">난이도 캠핑장</a></li>
+									<li><a href="/camp/glamping">글램핑/카라반</a></li>
 								</ul>
 							</li>
 							
@@ -122,11 +128,11 @@
 							<li>
 								<a href="#" class="dropdown">모닥불</a>
 								<ul>
-									<li><a href="#">자유게시판</a></li>
-									<li><a href="/campfire/review">캠핑 리뷰</a></li>
-									<li><a href="#">캠핑 팁</a></li>
-									<li><a href="#">캠핑 음식</a></li>
-									<li><a href="#">캠핑 가이드</a></li>
+									<li><a href="/free/freeList">자유게시판</a></li>
+									<li><a href="/review/reviewList">캠핑 리뷰</a></li>
+									<li><a href="/campfire/tip">캠핑 팁</a></li>
+									<li><a href="/campfire/food">캠핑 음식</a></li>
+									<li><a href="/campfire/guide">캠핑 가이드</a></li>
 								</ul>
 							</li>
 							<li class="smallMenu">
@@ -251,7 +257,7 @@
 	flush="true" : 문서의 출력 결과를 항상 버퍼내에서 갱신 하라는 의미이다
 	즉, 따로따로 실행 된 후 그 결과만을 가지고 include한다.
 --%>
-<%@include file="includes/footer.jsp" %>
+<%-- <%@include file="includes/footer.jsp" %> --%>
 	<%-- <%@include %>  
 	-. 서버측 include 라고 생각하면 된다
 	즉 소스 실행전에 include가 된다고 보자
@@ -265,6 +271,16 @@
 </body>
 
 <!-- 슬라이더 -->
+		<!-- Scripts -->
+		<script src="/resources/assets/js/jquery.min.js"></script>
+		<script src="/resources/assets/js/browser.min.js"></script>
+		<script src="/resources/assets/js/jquery.dropotron.min.js"></script>
+		<script src="/resources/assets/js/breakpoints.min.js"></script>
+		<script src="/resources/assets/js/util.js"></script>
+		<script src="/resources/assets/js/main.js"></script>
+		<script src="/resources/assets/js/moment.js"></script>
+		<script src="/resources/assets/js/moment-with-locales.js"></script>
+
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="/resources/slick/slick.min.js"></script>

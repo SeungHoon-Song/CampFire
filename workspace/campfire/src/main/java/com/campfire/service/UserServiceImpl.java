@@ -33,13 +33,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean register(UserVO user) {
+	public boolean signUp(UserVO user) {
 		user.setUserPw(encrypt(user.getUserPw()));
 		return mapper.insert(user) == 1;
 	}
 
 	@Override
-	public boolean login(String userId, String userPw) {
+	public boolean signIn(String userId, String userPw) {
 		boolean check = false;
 		String realPw = mapper.selectPw(userId);
 		if(realPw.equals(encrypt(userPw))) {
@@ -55,6 +55,16 @@ public class UserServiceImpl implements UserService{
 			en_pw += (char)(pw.charAt(i) * KEY);
 		}
 		return en_pw;
+	}
+
+	@Override
+	public String findId(String userEmail) {
+		return mapper.findId(userEmail);
+	}
+
+	@Override
+	public boolean findPw(String userId, String userEmail) {
+		return mapper.findPw(userId, userEmail) == 1;
 	}
 	
 }

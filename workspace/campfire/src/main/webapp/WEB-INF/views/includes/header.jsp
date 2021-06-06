@@ -10,14 +10,8 @@
 <link rel="stylesheet" href="/resources/assets/css/layout.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-	#header {
-		position: absolute;
-		background:#00000076;
-	}
+	
 	@media screen and (max-width: 980px) {
-		#header {
-			background: #00000000;
-		}
 		#header > .navPanelToggle {
 			display: block;
 			color: black;
@@ -34,12 +28,17 @@
 <body>
 	
 			<!-- Header -->
-			<header id="header" style="position: absolute;">
+			<header id="header">
 				<!-- Nav -->
 				<nav class="smallNav">
 					<ul>
+						<c:if test="${sessionId eq null}">
 						<li><a href="javascript:goSignUp()" class="signup">회원가입</a></li>
 						<li><a href="javascript:goSignIn()" class="signin">로그인</a></li>
+						</c:if>	
+						<c:if test="${sessionId ne null}">
+						<li><a href="/logout" class="logout">로그아웃</a></li>
+						</c:if>
 						<li><a href="/elements">고객센터</a></li>
 					</ul>
 				</nav>
@@ -53,23 +52,24 @@
 							<li>
 								<a href="#" class="dropdown">캠핑장</a> 
 								<ul>
-									<li><a href="#">전체</a></li>
-									<li><a href="#">유/무료 캠핑장</a></li>
-									<li><a href="#">난이도 캠핑장</a></li>
-									<li><a href="#">글램핑/카라반</a></li>
+									<li><a href="/camp/search">전체</a></li>
+									<li><a href="/camp/pay">유료 캠핑장</a></li>
+									<li><a href="/camp/free">무료 캠핑장</a></li>
+									<li><a href="/camp/level">난이도 캠핑장</a></li>
+									<li><a href="/camp/glamping">글램핑/카라반</a></li>
 								</ul>
 							</li>
 							
 							<li><a href="#">테마검색</a></li>
-							<li><a href="#">장작장터</a></li>
+							<li><a href="/market/marketList">장작장터</a></li>
 							<li>
 								<a href="#" class="dropdown">모닥불</a>
 								<ul>
-									<li><a href="#">자유게시판</a></li>
-									<li><a href="/campfire/review">캠핑 리뷰</a></li>
-									<li><a href="#">캠핑 팁</a></li>
-									<li><a href="#">캠핑 음식</a></li>
-									<li><a href="#">캠핑 가이드</a></li>
+									<li><a href="/free/freeList">자유게시판</a></li>
+									<li><a href="/review/reviewList">캠핑 리뷰</a></li>
+									<li><a href="/campfire/tip">캠핑 팁</a></li>
+									<li><a href="/campfire/food">캠핑 음식</a></li>
+									<li><a href="/campfire/guide">캠핑 가이드</a></li>
 								</ul>
 							</li>
 							<li class="smallMenu">
@@ -101,8 +101,12 @@
 									<div><a href="javascript:void(0);" id="goSignUpBtn" style="text-decoration: none;">회원가입</a>&nbsp;&nbsp;&nbsp;<a href="#" id="findIdPw" style="text-decoration: none;">아이디/비밀번호 찾기</a></div>
 									<ul class="actions">
 										<li>
-											<a><img id="kakaoImage" style="height: 46px;" src="/resources/images/kakaoLogin.png"></a>
-											<a><img id="kakaoImageLarge" style="height: 46px; width: 100%;" src="/resources/images/kakaoLoginLarge.png"></a>
+											<a href="https://kauth.kakao.com/oauth/authorize?client_id=419eaf834a5ea45f350a4ab9e5406ab1&redirect_uri=http://localhost/login&response_type=code"><img id="kakaoImage" style="height: 46px; width:100%;" src="/resources/images/kakaoLogin.png"></a>
+											<a href="https://kauth.kakao.com/oauth/authorize?client_id=419eaf834a5ea45f350a4ab9e5406ab1&redirect_uri=http://localhost/login&response_type=code"><img id="kakaoImageLarge" style="height: 46px; width: 100%;" src="/resources/images/kakaoLoginLarge.png"></a>
+											<%-- <c:if test="${sessionId ne null}">
+												 <h1>로그인 성공입니다, ${sessionId}</h1>
+        										 <input type="button" value="로그아웃" onclick="location.href='/logout'">
+											</c:if> --%>
 										</li>
 										<li>
 											<a class="button primary" id="loginBtn" style="border-radius: 6px; height: 46px;">로그인</a>
@@ -226,4 +230,9 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 <script src="/resources/assets/js/modal.js"></script>
+<script src="/resources/assets/js/user.js"></script>
+<script>
+	var pageContext = "${pageContext.request.contextPath}";
+	var sessionId = "${sessionId}";
+</script>
 </html>
